@@ -95,8 +95,36 @@ Abis proyek ini ada di komputer kalian, boleh (baca: harus) disetup dulu laravel
 
 ## Kolaborasi
 
-Biar makin cepet beres boleh dibantu pengembangannya buat yang pake git dengan nge-_push_ hasil kerja kalian ke repository ini dengan perintah di bawah (masukinnya sebaris sebaris). Tapi jangan di _branch_ `master`. _Branch_ `master` cuma buat kode yang udah verified
+Biar makin cepet beres boleh dibantu pengembangannya buat yang pake git dengan nge-_push_ hasil kerja kalian ke repository ini dengan perintah di bawah (masukinnya sebaris sebaris). Tapi jangan di _branch_ `master`. _Branch_ `master` cuma buat kode yang udah verified.
+
+Maka dari itu ada baiknya bikin _branch_ baru (namanya bebas, tapi buat contoh disini namanya `nama-branch`) dengan perintah di bawah ini (masukin sebaris-sebaris):
+
+    git branch nama-branch
+    git checkout nama-branch
+
+Catatan: Perintah di atas bakalan gagal kalo kalian udah terlanjur coding. cara mengatasinya adalah dengan perintah berikut:
+
+    git branch nama-branch
+    git stash
+    git checkout nama-branch
+    git stash pop
+
+Kemudian kalo udah siap dibagi sama yang lain masukin perintah di bawah
 
     git add .
     git commit -m "pesan commit. contohnya: nambah fungsi blabla. maks 72 karakter"
-    git push origin master
+    git push origin nama-branch
+
+Kalo misalnya ada update di _branch_ `master` dan kalian mau lanjut develop dari situ, _push_ hasil kerja kalian terlebih dahulu (lihat perintah di atas) abis itu masukin perintah di bawah ini sebaris-sebaris:
+
+    git checkout master
+    git pull
+    git branch -C master nama-branch
+
+# Taking to the next level
+
+Kalo menurut kalian aplikasi ini bisa _taken to the next level_ ada baiknya kalian _fork_ _repository_ ini dan lanjut develop disana
+
+# Akhir Kata
+
+Ini adalah proyek yang saya buat untuk uji kompetensi RPL jaman tahun 2019. Kalo kalian kebetulan perlu proyek ini buat belajar silahkan pakai proyek ini sesuka kalian dengan mematuhi _guideline_ yang sudah ditetapkan di atas. Kalo kebetulan kalian nge-fork dan _publish_ aplikasi ini di bawah nama kalian, _it's good_ tapi jangan lupa untuk mencantumkan keterangan bahwa projek kalian itu di-fork dari _repository ini_. Happy Coding!

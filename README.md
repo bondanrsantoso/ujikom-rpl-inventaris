@@ -11,7 +11,7 @@ Proyek ini dibikin pake framework PHP laravel jadi perlu diperhatikan hal-hal di
 1. PHP versi 7.2 atau lebih baru (lengkapnya bisa diliat [disini](https://laravel.com/docs/5.8/installation))
 2. Database SQL (MySQL, MariaBD, Postgre, etc);
 3. Kalo gamau males intall 2 benda di atas boleh install paket AMP(Apache + MySQL/MariaDB + PHP). Buat Windows boleh install WAMP (ga _recommend_), macOS direkomendasikan install MAMP, lainnya boleh install XAMPP (berlaku untuk Windows, Linux, dan macOS)
-4. Composer (bisa dicari [disini](getcomposer.org))
+4. Composer (bisa dicari [disini](https://getcomposer.org))
 5. Git (Gawajib tapi sangat disunnahkan untuk menginstall karena kalo gw update gaperlu download ulang proyeknya. Download [disini](https://git-scm.com/downloads))
 
 ## Cara biar proyek ini ada di komputer
@@ -62,7 +62,7 @@ Kalo di terminal `sh` (Linux/macOS)
 Abis proyek ini ada di komputer kalian, boleh (baca: harus) disetup dulu laravel-nya biar bisa _running_
 
 1.  Install PHP+Database (atau pake paket AMP) kalo belum
-2.  Install [Composer](getcomposer.org) kalo belum
+2.  Install [Composer](https://getcomposer.org) kalo belum
 3.  Masuk ke direktori tempat proyek ini disimpen (liat instriksi di atas yang judulnya **_Side note_** kalo gapaham)
 4.  Di Terminal/Command Prompt/Powershell masukin perintah di bawah
 

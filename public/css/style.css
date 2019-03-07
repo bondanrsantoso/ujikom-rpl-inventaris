@@ -1,0 +1,188 @@
+:root {
+    --primary: #233142;
+    --primary__hover: #374353;
+    --primary__active: #17202a;
+    --secondary: #4f9da6;
+    --secondary__hover: #8fc0c6;
+    --secondary__active: #488f97;
+    --success: #28a745;
+    --success__hover: #76c788;
+    --success__active: #1e7a33;
+    --info: #facf5a;
+    --info__hover: #fbe096;
+    --info__active: #cdaa4a;
+    --warning: #ffd700;
+    --warning__hover: #ffe55c;
+    --warning__active: #ba9d00;
+    --danger: #df4d19;
+    --danger__hover: #ea8d6c;
+    --danger__active: #cb4617;
+}
+
+.btn {
+    transition: all 229ms ease-in-out;
+    box-shadow: 0 10px 35px 0px rgba(0, 0, 0, 0);
+    transform: scale(1) translateY(0px);
+}
+
+.btn:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 10px 35px 0px rgba(0, 0, 0, 0.2);
+}
+
+.btn:not(:disabled):not(.disabled).active,
+.btn:not(:disabled):not(.disabled):active {
+    transform: scale(1.02) translateY(-1px);
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.4);
+}
+
+.btn.disabled,
+.btn:disabled {
+    opacity: 75%;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: var(--primary);
+    border: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus {
+    color: #fff;
+    background-color: var(--primary__hover);
+    border: none;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: var(--primary__active);
+    border: none;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: var(--secondary);
+    border: none;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary.focus {
+    color: #fff;
+    background-color: var(--secondary__hover);
+    border: none;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active,
+.btn-secondary:not(:disabled):not(.disabled):active,
+.show > .btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: var(--secondary__active);
+    border: none;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: var(--success);
+    border: none;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success.focus {
+    color: #fff;
+    background-color: var(--success__hover);
+    border: none;
+}
+
+.btn-success:not(:disabled):not(.disabled).active,
+.btn-success:not(:disabled):not(.disabled):active,
+.show > .btn-success.dropdown-toggle {
+    color: #fff;
+    background-color: var(--success__active);
+    border: none;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: var(--info);
+    border: none;
+}
+
+.btn-info:hover,
+.btn-info:focus,
+.btn-info.focus {
+    color: #fff;
+    background-color: var(--info__hover);
+    border: none;
+}
+
+.btn-info:not(:disabled):not(.disabled).active,
+.btn-info:not(:disabled):not(.disabled):active,
+.show > .btn-info.dropdown-toggle {
+    color: #fff;
+    background-color: var(--info__active);
+    border: none;
+}
+
+.btn-warning {
+    color: #000;
+    background-color: var(--warning);
+    border: none;
+}
+
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning.focus {
+    color: #000;
+    background-color: var(--warning__hover);
+    border: none;
+}
+
+.btn-warning:not(:disabled):not(.disabled).active,
+.btn-warning:not(:disabled):not(.disabled):active,
+.show > .btn-warning.dropdown-toggle {
+    color: #000;
+    background-color: var(--warning__active);
+    border: none;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: var(--danger);
+    border: none;
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger.focus {
+    color: #fff;
+    background-color: var(--danger__hover);
+    border: none;
+}
+
+.btn-danger:not(:disabled):not(.disabled).active,
+.btn-danger:not(:disabled):not(.disabled):active,
+.show > .btn-danger.dropdown-toggle {
+    color: #fff;
+    background-color: var(--danger__active);
+    border: none;
+}
+
+.card {
+    box-shadow: 0 10px 35px 0px rgba(0, 0, 0, 0.2);
+}
+
+.card .card-header {
+    text-align: center;
+    letter-spacing: 0.3em;
+}
+
+input.form-control {
+    border-radius: 3rem;
+    border: 1px solid #ced4da;
+}

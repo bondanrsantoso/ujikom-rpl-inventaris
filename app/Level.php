@@ -11,6 +11,7 @@ class Level extends Model
     ];
 
     protected $primaryKey = "id_level";
+    public $timestamps = false
 
     public function users()
     {

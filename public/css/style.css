@@ -1,22 +1,34 @@
 :root {
     --primary: #233142;
-    --primary__hover: #374353;
-    --primary__active: #17202a;
+    --primary__lighten: #374353;
+    --primary__darken: #17202a;
     --secondary: #4f9da6;
-    --secondary__hover: #8fc0c6;
-    --secondary__active: #488f97;
+    --secondary__lighten: #8fc0c6;
+    --secondary__darken: #488f97;
     --success: #28a745;
-    --success__hover: #76c788;
-    --success__active: #1e7a33;
+    --success__lighten: #76c788;
+    --success__darken: #1e7a33;
     --info: #facf5a;
-    --info__hover: #fbe096;
-    --info__active: #cdaa4a;
+    --info__darken: #fbe096;
+    --info__darken: #cdaa4a;
     --warning: #ffd700;
-    --warning__hover: #ffe55c;
-    --warning__active: #ba9d00;
+    --warning__darken: #ffe55c;
+    --warning__darken: #ba9d00;
     --danger: #df4d19;
-    --danger__hover: #ea8d6c;
-    --danger__active: #cb4617;
+    --danger__darken: #ea8d6c;
+    --danger__darken: #cb4617;
+}
+
+#app {
+    background-color: #efefef;
+    min-height: 100vh;
+}
+
+main {
+    min-height: calc(100vh - 56px);
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
 }
 
 .btn {
@@ -51,7 +63,7 @@
 .btn-primary:focus,
 .btn-primary.focus {
     color: #fff;
-    background-color: var(--primary__hover);
+    background-color: var(--primary__lighten);
     border: none;
 }
 
@@ -59,7 +71,7 @@
 .btn-primary:not(:disabled):not(.disabled):active,
 .show > .btn-primary.dropdown-toggle {
     color: #fff;
-    background-color: var(--primary__active);
+    background-color: var(--primary__darken);
     border: none;
 }
 
@@ -73,7 +85,7 @@
 .btn-secondary:focus,
 .btn-secondary.focus {
     color: #fff;
-    background-color: var(--secondary__hover);
+    background-color: var(--secondary__lighten);
     border: none;
 }
 
@@ -81,7 +93,7 @@
 .btn-secondary:not(:disabled):not(.disabled):active,
 .show > .btn-secondary.dropdown-toggle {
     color: #fff;
-    background-color: var(--secondary__active);
+    background-color: var(--secondary__darken);
     border: none;
 }
 
@@ -95,7 +107,7 @@
 .btn-success:focus,
 .btn-success.focus {
     color: #fff;
-    background-color: var(--success__hover);
+    background-color: var(--success__lighten);
     border: none;
 }
 
@@ -103,7 +115,7 @@
 .btn-success:not(:disabled):not(.disabled):active,
 .show > .btn-success.dropdown-toggle {
     color: #fff;
-    background-color: var(--success__active);
+    background-color: var(--success__darken);
     border: none;
 }
 
@@ -117,7 +129,7 @@
 .btn-info:focus,
 .btn-info.focus {
     color: #fff;
-    background-color: var(--info__hover);
+    background-color: var(--info__darken);
     border: none;
 }
 
@@ -125,7 +137,7 @@
 .btn-info:not(:disabled):not(.disabled):active,
 .show > .btn-info.dropdown-toggle {
     color: #fff;
-    background-color: var(--info__active);
+    background-color: var(--info__darken);
     border: none;
 }
 
@@ -139,7 +151,7 @@
 .btn-warning:focus,
 .btn-warning.focus {
     color: #000;
-    background-color: var(--warning__hover);
+    background-color: var(--warning__darken);
     border: none;
 }
 
@@ -147,7 +159,7 @@
 .btn-warning:not(:disabled):not(.disabled):active,
 .show > .btn-warning.dropdown-toggle {
     color: #000;
-    background-color: var(--warning__active);
+    background-color: var(--warning__darken);
     border: none;
 }
 
@@ -161,7 +173,7 @@
 .btn-danger:focus,
 .btn-danger.focus {
     color: #fff;
-    background-color: var(--danger__hover);
+    background-color: var(--danger__darken);
     border: none;
 }
 
@@ -169,20 +181,113 @@
 .btn-danger:not(:disabled):not(.disabled):active,
 .show > .btn-danger.dropdown-toggle {
     color: #fff;
-    background-color: var(--danger__active);
+    background-color: var(--danger__darken);
     border: none;
 }
 
+.bg-primary {
+    background-color: var(--primary) !important;
+}
+.bg-primary__darken {
+    background-color: var(--primary__darken) !important;
+}
+.bg-primary__lighten {
+    background-color: var(--primary__lighten) !important;
+}
+.bg-secondary {
+    background-color: var(--secondary) !important;
+}
+.bg-secondary__darken {
+    background-color: var(--secondary__darken) !important;
+}
+.bg-secondary__lighten {
+    background-color: var(--secondary__lighten) !important;
+}
+.bg-success {
+    background-color: var(--success) !important;
+}
+.bg-success__darken {
+    background-color: var(--success__darken) !important;
+}
+.bg-success__lighten {
+    background-color: var(--success__lighten) !important;
+}
+.bg-info {
+    background-color: var(--info) !important;
+}
+.bg-info__darken {
+    background-color: var(--info__darken) !important;
+}
+.bg-info__lighten {
+    background-color: var(--info__lighten) !important;
+}
+.bg-warning {
+    background-color: var(--warning) !important;
+}
+.bg-warning__darken {
+    background-color: var(--warning__darken) !important;
+}
+.bg-warning__lighten {
+    background-color: var(--warning__lighten) !important;
+}
+.bg-danger {
+    background-color: var(--danger) !important;
+}
+.bg-danger__darken {
+    background-color: var(--danger__darken) !important;
+}
+.bg-danger__lighten {
+    background-color: var(--danger__lighten) !important;
+}
+
+.text-primary {
+    color: var(--primary) !important;
+}
+.text-secondary {
+    color: var(--secondary) !important;
+}
+.text-success {
+    color: var(--success) !important;
+}
+.text-info {
+    color: var(--info) !important;
+}
+.text-warning {
+    color: var(--warning) !important;
+}
+.text-danger {
+    color: var(--danger) !important;
+}
+
 .card {
-    box-shadow: 0 10px 35px 0px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.2); */
+    border: none;
+    border-radius: 10px;
+    border: 1px solid #ddd;
 }
 
 .card .card-header {
     text-align: center;
+    border-radius: 10px 10px 0 0;
+}
+
+.card .card-header .card-title {
+    font-weight: bold;
     letter-spacing: 0.3em;
+    margin-top: 10px;
+    text-transform: uppercase;
 }
 
 input.form-control {
     border-radius: 3rem;
     border: 1px solid #ced4da;
+}
+
+.app-sidebar {
+    background-color: var(--primary__darken);
+    color: white;
+}
+
+.app-sidebar a {
+    color: white;
 }

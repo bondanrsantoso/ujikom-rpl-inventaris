@@ -1,11 +1,11 @@
 @extends('layouts.app') 
 @section('content')
-<div class="container">
+<div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-white border-bottom-0">
-                    <h3 class="text-uppercase font-weight-bold mt-2 ">{{ __('Sign In') }}</h3>
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title">{{ __('Sign In') }}</h3>
                 </div>
 
                 <div class="card-body">

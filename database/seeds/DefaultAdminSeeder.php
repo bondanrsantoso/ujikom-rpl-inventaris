@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DefaultAdminSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class DefaultAdminSeeder extends Seeder
             'name' => "Admin",
             'email' => "admin@here.com",
             'username' => "admin",
-            'password' => bcrypt("admin"),
+            'password' => Hash::make("admin"),
             'id_level' => 1
         ]);
     }

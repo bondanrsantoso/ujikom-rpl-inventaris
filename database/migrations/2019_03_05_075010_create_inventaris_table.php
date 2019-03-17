@@ -25,6 +25,7 @@ class CreateInventarisTable extends Migration
             $table->string("kode_inventaris");
             $table->unsignedBigInteger("id_petugas");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

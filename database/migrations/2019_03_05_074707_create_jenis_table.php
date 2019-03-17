@@ -19,6 +19,7 @@ class CreateJenisTable extends Migration
             $table->string('kode_jenis');
             $table->text('keterangan');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

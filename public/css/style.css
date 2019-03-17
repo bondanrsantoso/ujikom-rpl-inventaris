@@ -9,14 +9,26 @@
     --success__lighten: #76c788;
     --success__darken: #1e7a33;
     --info: #facf5a;
-    --info__darken: #fbe096;
+    --info__lighten: #fbe096;
     --info__darken: #cdaa4a;
     --warning: #ffd700;
-    --warning__darken: #ffe55c;
+    --warning__lighten: #ffe55c;
     --warning__darken: #ba9d00;
     --danger: #df4d19;
-    --danger__darken: #ea8d6c;
+    --danger__lighten: #ea8d6c;
     --danger__darken: #cb4617;
+}
+
+html,
+body {
+    font-family: "PT Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "PT Serif Caption", serif;
 }
 
 #app {
@@ -240,6 +252,37 @@ main {
     background-color: var(--danger__lighten) !important;
 }
 
+.alert-primary {
+    color: #fff;
+    background-color: var(--primary);
+    border-color: var(--primary__lighten);
+}
+.alert-secondary {
+    color: #fff;
+    background-color: var(--secondary);
+    border-color: var(--secondary__lighten);
+}
+.alert-info {
+    color: #333;
+    background-color: var(--info);
+    border-color: var(--info__lighten);
+}
+.alert-warning {
+    color: #333;
+    background-color: var(--warning);
+    border-color: var(--warning__lighten);
+}
+.alert-danger {
+    color: #fff;
+    background-color: var(--danger);
+    border-color: var(--danger__lighten);
+}
+.alert-success {
+    color: #fff;
+    background-color: var(--success);
+    border-color: var(--success__lighten);
+}
+
 .text-primary {
     color: var(--primary) !important;
 }
@@ -278,9 +321,13 @@ main {
     text-transform: uppercase;
 }
 
-input.form-control {
-    border-radius: 3rem;
+input.form-control,
+.input-group-text {
+    border-radius: 15px;
     border: 1px solid #ced4da;
+}
+.input-group-text {
+    background-color: #fff;
 }
 
 .app-sidebar {

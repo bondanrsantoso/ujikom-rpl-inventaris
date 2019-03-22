@@ -16,7 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+// Ruangan API Routes
 Route::middleware('auth:api')->post('ruang/add', "RuangController@add");
 Route::middleware('auth:api')->delete('ruang/delete', "RuangController@delete");
 Route::get('ruang/get', "RuangController@get");
+// Jenis API Routes
+Route::middleware('auth:api')->post('jenis/add', "JenisController@add");
+Route::middleware('auth:api')->delete('jenis/delete', "JenisController@delete");
+Route::get('jenis/get', "JenisController@get");

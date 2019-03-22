@@ -1,6 +1,6 @@
 @extends('layouts.app') 
-@section('content')
-    @include('components.sidebar')
+@section('content') @component('components.sidebar', [ 'more_classes' => 'col-12 col-md-3 col-xl-2',
+'active_link' => url('home')]) @endcomponent
 
 <div class="col-12 col-md-9 col-xl-10 pt-4">
     <div class="container">

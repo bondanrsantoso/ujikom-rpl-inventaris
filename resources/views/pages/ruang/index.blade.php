@@ -13,8 +13,8 @@
 <script type="text/javascript" src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
 @endsection
  
-@section('content')
-    @include('components.sidebar')
+@section('content') @component('components.sidebar', [ 'more_classes' => 'col-12 col-md-3 col-xl-2', 'active_link'
+=> url('ruang')]) @endcomponent
 <div class="col-12 col-md-9 col-xl-10 pt-4">
     <h1>Daftar Ruangan</h1>
 
@@ -135,12 +135,14 @@
             serverSide: true,
             ajax:'api/ruang/get',
             select: 'single',
+            dom: 'fSrtBip',
             columnDefs: [
                 {
                     targets: [0],
                     visible:false
                 }
-            ]
+            ],
+            buttons: ['excel', 'pdf', 'print']
         });
         $table.on('select', function(e, dataTable, type, indexes){
             var selectedItem = $table.rows(indexes).data()[0];
@@ -226,6 +228,7 @@
         $("#submit").html("Tambah")
         $("#reset").removeClass("d-none")
         $("#delete").addClass("d-none")
+        $table.rows('.selected').deselect()
     })
 
 </script>

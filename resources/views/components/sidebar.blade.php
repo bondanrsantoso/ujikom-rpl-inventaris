@@ -1,9 +1,9 @@
-<div class="col-12 col-md-3 col-xl-2 app-sidebar">
-    <nav class="nav flex-column">
-        <a href="{{url('ruang')}}" class="nav-link active">Ruang</a>
-        <a href="#" class="nav-link">Ipsum</a>
+<div class="app-sidebar {{$more_classes}}">
+    <nav class="nav mt-4 flex-column">
+        <a href="{{url('ruang')}}" class="nav-link{{$active_link == url('ruang')? " active " : " "}}">Ruang</a>
+        <a href="{{url('jenis')}}" class="nav-link{{$active_link == url('jenis')? " active " : " "}}">Jenis</a>
         <a href="#" class="nav-link">Dolor</a>
-        <a href="#" class="nav-link">It is </a>
+        <a href="#" class="nav-link disabled">It is </a>
         <a href="#" class="nav-link">A link</a>
     </nav>
 </div>

@@ -335,6 +335,19 @@ input.form-control,
     color: white;
 }
 
-.app-sidebar a {
+.app-sidebar .nav-link {
+    background-color: transparent;
     color: white;
+    border-radius: 25px;
+    margin: 0.25rem 0;
+}
+.app-sidebar .nav-link.active {
+    color: var(--info__lighten);
+}
+.app-sidebar .nav-link.active,
+.app-sidebar .nav-link:hover {
+    background-color: var(--primary__lighten);
+}
+.app-sidebar .nav-link.disabled {
+    color: #6c757d;
 }

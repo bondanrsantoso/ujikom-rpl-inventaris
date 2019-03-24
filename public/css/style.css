@@ -322,6 +322,8 @@ main {
 }
 
 input.form-control,
+select.form-control,
+textarea.form-control,
 .input-group-text {
     border-radius: 15px;
     border: 1px solid #ced4da;

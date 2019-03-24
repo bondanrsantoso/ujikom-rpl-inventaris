@@ -24,3 +24,7 @@ Route::get('ruang/get', "RuangController@get");
 Route::middleware('auth:api')->post('jenis/add', "JenisController@add");
 Route::middleware('auth:api')->delete('jenis/delete', "JenisController@delete");
 Route::get('jenis/get', "JenisController@get");
+// Inventaris API Routes
+Route::middleware('auth:api')->post('inventaris/add', "InventarisController@add");
+Route::middleware('auth:api')->delete('inventaris/delete', "InventarisController@delete");
+Route::get('inventaris/get', "InventarisController@get");

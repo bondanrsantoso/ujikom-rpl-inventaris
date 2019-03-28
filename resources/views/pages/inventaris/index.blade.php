@@ -9,7 +9,7 @@
 @section('more-js-before-body')
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/b-1.5.6/b-flash-1.5.6/b-html5-1.5.6/b-print-1.5.6/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/b-1.5.6/b-html5-1.5.6/b-print-1.5.6/sc-2.0.0/datatables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
 @endsection
  
@@ -142,7 +142,7 @@
     </div>
 
     <table class="datatable table table-striped table-hover" id="inventaris-table">
-        <thead class="thead-dark">
+        <thead class="thead-primary">
             <th>ID</th>
             <th>ID Jenis</th>
             <th>ID Ruang</th>
@@ -172,7 +172,12 @@
             serverSide: true,
             ajax:'{{url("api/inventaris/get")}}',
             select: 'single',
-            dom: 'fSrtBip',
+            dom: 'fSrtip',
+            scrollX: true,
+            scrollY: (window.innerHeight > 550? window.innerHeight : 550 ) - 350,
+            scrollCollapse: true,
+            deferRender: true,
+            scroller:true,
             columnDefs: [
                 {
                     targets: [0],

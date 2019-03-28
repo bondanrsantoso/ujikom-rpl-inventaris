@@ -28,3 +28,5 @@ Route::get('jenis/get', "JenisController@get");
 Route::middleware('auth:api')->post('inventaris/add', "InventarisController@add");
 Route::middleware('auth:api')->delete('inventaris/delete', "InventarisController@delete");
 Route::get('inventaris/get', "InventarisController@get");
+// Peminjaman API Routes
+Route::post('peminjaman/checkItem', "PeminjamanController@checkAvailableStock");

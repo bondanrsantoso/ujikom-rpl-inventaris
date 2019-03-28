@@ -113,7 +113,7 @@
     </div>
 
     <table class="datatable table table-striped table-hover" id="ruangan-table">
-        <thead class="thead-dark">
+        <thead class="thead-primary">
             <th>ID</th>
             <th>No.</th>
             <th>Kode</th>
@@ -135,7 +135,11 @@
             serverSide: true,
             ajax:'api/ruang/get',
             select: 'single',
-            dom: 'fSrtBip',
+            dom: 'fSrtip',
+            scrollY: window.innerHeight - 350,
+            scrollCollapse: true,
+            deferRender: true,
+            scroller:true,
             columnDefs: [
                 {
                     targets: [0],

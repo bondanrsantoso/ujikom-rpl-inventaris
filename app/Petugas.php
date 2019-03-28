@@ -14,6 +14,6 @@ class Petugas extends Model
     }
 
     public function inventaris(){
-        return $this->hasMany('App\Inventaris', "id_petugas", $primaryKey);
+        return $this->hasMany('App\Inventaris', "id_petugas", $this->primaryKey);
     }
 }

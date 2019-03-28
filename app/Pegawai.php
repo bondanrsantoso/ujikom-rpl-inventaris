@@ -10,6 +10,6 @@ class Pegawai extends Model
 
     public function peminjaman()
     {
-        return $this->hasMany("App\Peminjaman", "id_pegawai", $primaryKey);
+        return $this->hasMany("App\Peminjaman", "id_pegawai", $this->primaryKey);
     }
 }

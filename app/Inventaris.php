@@ -28,6 +28,6 @@ class Inventaris extends Model
 
     public function detailPinjam()
     {
-        return $this->hasMany("App\DetailPinjam", "id_inventaris", $primaryKey);
+        return $this->hasMany("App\DetailPinjam", "id_inventaris", $this->primaryKey);
     }
 }

@@ -207,6 +207,7 @@
 
             if($("#inv" + selectedItem[0]).html() === undefined){
                 $("#takeaway").val(0);
+                $("#takeaway").removeAttr("value");
                 $("#addBtn").html("Tambah")
             } else {
                 $("#takeaway").val($("#inv" + selectedItem[0]).val());
@@ -233,14 +234,24 @@
     })
 
     $("#itemCheckBtn").click(checkAvailability)
-    $("#takeaway_date").change(checkAvailability)
-    $("#return_date").change(checkAvailability)
+    $("#takeaway_date").change(function(){
+        var startDate = new Date(this.value);
+        var endDate = new Date($("#return_date").val())
+        if(endDate < startDate){
+            $("#return_date").val(this.value);
+        }
+        $("#return_date").attr("min", this.value)
+    })
 
     function checkAvailability(){
+        if($("#id_inventaris").val() == ""){
+            return 
+        }
+
         var formData = new FormData(document.getElementById("mainForm"))
 
         $.ajax({
-            method:'POST',
+            method: "POST",
             url: checkItemURL,
             processData: false,
             contentType: false,
@@ -258,6 +269,9 @@
 
     $("#addForm").submit(function(e){
         e.preventDefault();
+        if($("#nama").val() == ""){
+            return
+        }
         var idInventaris = $("#id_inventaris").val();
         var takeaway = $("#takeaway").val();
         var formTemplate = 
@@ -275,6 +289,7 @@
         }
 
         $("#takeaway").val(0);
+        $("#takeaway").removeAttr("value");
         $("#id_inventaris").val("")
         $("#nama").val("")
         $("#stock").val(0);

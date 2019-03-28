@@ -15,6 +15,6 @@ class Ruang extends Model
 
     public function inventaris()
     {
-        return $this->hasMany("App\Inventaris", "id_ruang", $primaryKey);
+        return $this->hasMany("App\Inventaris", "id_ruang", $this->primaryKey);
     }
 }

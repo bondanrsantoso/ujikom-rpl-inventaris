@@ -13,6 +13,6 @@ class Jenis extends Model
 
     public function inventaris()
     {
-        $this->hasMany('App\Inventaris', "id_jenis", $primaryKey);
+        $this->hasMany('App\Inventaris', "id_jenis", $this->primaryKey);
     }
 }

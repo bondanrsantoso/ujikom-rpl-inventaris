@@ -34,9 +34,15 @@ Install git kalo belum ngistall. Buka terminal/Command Prompt/PowerShell terus k
 
 #### Kalo ada update
 
-Kalo gw kebetulan update atau kalian _notice_ ada update di _repository_ masukin perintah di bawah terus pencet `enter`
+Kalo saya kebetulan update atau kalian _notice_ ada update di _repository_ masukin perintah di bawah terus pencet `enter`
 
     git pull
+
+Ada kalanya perintah di atas gagal. Apabila ini terjadi copy project yang telah dikerjakan ke folder lain sebagai backup kemudian (masih di folder project yang lama) masukkan perintah di bawah satu-persatu
+
+    git stash
+    git fetch --all
+    git reset --hard origin/master
 
 #### _Side note_
 

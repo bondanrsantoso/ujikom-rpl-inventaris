@@ -113,4 +113,47 @@ class InventarisController extends Controller
             'message' => 'Data Inventaris telah dihapus'
         ], 200);
     }
+
+    public function apiGet(Request $request)
+    {
+        $search = $request->q;
+        $totalData = Inventaris::all()->count();
+
+        $inventarisQuery = Inventaris::orderBy('id_inventaris');
+        if($search != null){
+            $inventarisQuery = $inventarisQuery->where('nama', 'like', '%'.$search.'%')->orWhere('kode_inventaris', 'like', '%'.$search.'%');
+        }
+        $inventarisFilteredCount = $inventarisQuery->count();
+        $Inventaris = $inventarisQuery->offset($request->offset ?? 0)->limit($request->limit ?? 10)->get();
+        $responseJSON = [
+            'data' => [],
+            'additional_data' => [
+                'total_rows' => $totalData,
+                'total_rows_filtered' => $inventarisFilteredCount
+            ]
+        ];
+        $i = 0;
+        foreach($Inventaris as $inventaris){
+            $dateTime =  new \DateTime($inventaris->tanggal_register);
+            array_push($responseJSON['data'], [
+                'id_inventaris' => $inventaris->id_inventaris,
+                'id_jenis' => $inventaris->id_jenis,
+                'id_ruang' => $inventaris->id_ruang,
+                'kode_inventaris' => $inventaris->kode_inventaris,
+                'nama' => $inventaris->nama,
+                'kondisi' => $inventaris->kondisi,
+                'jumlah' => $inventaris->jumlah,
+                'url_gambar' => "https://images.pexels.com/photos/1166420/pexels-photo-1166420.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+                'kode_jenis' => $inventaris->jenis->kode_jenis,
+                'nama_jenis' => $inventaris->jenis->nama_jenis,
+                'kode_ruang' => $inventaris->ruang->kode_ruang,
+                'nama_ruang' => $inventaris->ruang->nama_ruang,
+                'kode_petugas' => $inventaris->petugas->nama_petugas,
+                'tanggal_register' => $dateTime->format('d F Y'),
+                'keterangan' => $inventaris->keterangan
+            ]);
+        }
+
+        return response()->json($responseJSON);
+    }
 }

@@ -89,4 +89,40 @@ class JenisController extends Controller
             'message' => 'Data Jenis telah dihapus'
         ], 200);
     }
+
+    // API Controllers
+
+    public function apiGet(Request $request)
+    {
+        $search = $request->q ?? "";
+        $totalData = Jenis::all()->count();
+
+        $jenisQuery = Jenis::orderBy('id_jenis');
+        if($search != null){
+            $jenisQuery = $jenisQuery->where('nama_jenis', 'like', '%'.$search.'%')->orWhere('kode_jenis', 'like', '%'.$search.'%');
+        }
+        $jenisFilteredCount = $jenisQuery->count();
+        $offset = $request->offset ?? 0;
+        $limit = $request->length ?? 10;
+        $Jenis = $jenisQuery->offset($offset)->limit($limit)->get();
+        $responseJSON = [
+            'data' => [],
+            'additional_data' => [
+                'total_rows' => $totalData,
+                'total_rows_filtered' => $jenisFilteredCount
+            ]
+        ];
+        $i = 0;
+        foreach($Jenis as $jenis){
+            array_push($responseJSON['data'], [
+                'id_jenis' => $jenis->id_jenis,
+                'no' => $request->start + ++$i,
+                'kode_jenis' => $jenis->kode_jenis,
+                'nama' => $jenis->nama_jenis,
+                'keterangan' => $jenis->keterangan
+            ]);
+        }
+
+        return response()->json($responseJSON);
+    }
 }

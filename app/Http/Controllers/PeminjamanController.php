@@ -113,28 +113,28 @@ class PeminjamanController extends Controller
     public function get(Request $request)
     {
         $search = $request->search;
-        $totalData = Ruang::all()->count();
+        $totalData = Peminjaman::all()->count();
 
-        $ruangQuery = Ruang::orderBy('id_ruang');
+        $peminjamanQuery = Peminjaman::orderBy('tanggal_pinjam')->orderBy('tanggal_kembali')->orderBy("kembali");
         if($search['value'] != null){
-            $ruangQuery = $ruangQuery->where('nama_ruang', 'like', '%'.$search['value'].'%')->orWhere('kode_ruang', 'like', $search['value']);
+            $peminjamanQuery = $peminjamanQuery->where('nama_peminjaman', 'like', '%'.$search['value'].'%')->orWhere('kode_peminjaman', 'like', $search['value']);
         }
-        $ruangFilteredCount = $ruangQuery->count();
-        $ruangan = $ruangQuery->offset($request->start)->limit($request->length)->get();
+        $peminjamanFilteredCount = $peminjamanQuery->count();
+        $Peminjaman = $peminjamanQuery->offset($request->start)->limit($request->length)->get();
         $responseJSON = [
             'draw' => $request->draw,
             'recordsTotal' => $totalData,
-            'recordsFiltered' => $ruangFilteredCount,
+            'recordsFiltered' => $peminjamanFilteredCount,
             'data' => []
         ];
         $i = 0;
-        foreach($ruangan as $ruang){
+        foreach($Peminjaman as $peminjaman){
             array_push($responseJSON['data'], [
-                $ruang->id_ruang,
+                $peminjaman->id_peminjaman,
                 $request->start + ++$i,
-                $ruang->kode_ruang,
-                $ruang->nama_ruang,
-                $ruang->keterangan
+                $peminjaman->kode_peminjaman,
+                $peminjaman->nama_peminjaman,
+                $peminjaman->keterangan
             ]);
         }
 

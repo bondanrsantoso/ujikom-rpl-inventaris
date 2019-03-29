@@ -97,4 +97,40 @@ class RuangController extends Controller
             'message' => 'Data ruangan telah dihapus'
         ], 200);
     }
+
+    // API Controllers
+
+    public function apiGet(Request $request)
+    {
+        $search = $request->q ?? "";
+        $totalData = Ruang::all()->count();
+
+        $ruangQuery = Ruang::orderBy('id_ruang');
+        if($search != null){
+            $ruangQuery = $ruangQuery->where('nama_ruang', 'like', '%'.$search.'%')->orWhere('kode_ruang', 'like', '%'.$search.'%');
+        }
+        $ruangFilteredCount = $ruangQuery->count();
+        $offset = $request->offset ?? 0;
+        $limit = $request->length ?? 10;
+        $Ruang = $ruangQuery->offset($offset)->limit($limit)->get();
+        $responseJSON = [
+            'data' => [],
+            'additional_data' => [
+                'total_rows' => $totalData,
+                'total_rows_filtered' => $ruangFilteredCount
+            ]
+        ];
+        $i = 0;
+        foreach($Ruang as $ruang){
+            array_push($responseJSON['data'], [
+                'id_ruang' => $ruang->id_ruang,
+                'no' => $request->start + ++$i,
+                'kode_ruang' => $ruang->kode_ruang,
+                'nama' => $ruang->nama_ruang,
+                'keterangan' => $ruang->keterangan
+            ]);
+        }
+
+        return response()->json($responseJSON);
+    }
 }

@@ -16,6 +16,6 @@ class Peminjaman extends Model
 
     public function detailPinjam()
     {
-        return $this->hasMany("App\DetailPinjam", "id_peminjaman", $primaryKey);
+        return $this->hasMany("App\DetailPinjam", "id_peminjaman", $this->primaryKey);
     }
 }

@@ -17,7 +17,7 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i|PT+Serif+Caption" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Racing+Sans+One|Source+Sans+Pro:300,300i,400,400i,700,700i" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">

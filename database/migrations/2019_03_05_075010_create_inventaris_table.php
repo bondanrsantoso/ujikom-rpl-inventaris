@@ -24,6 +24,7 @@ class CreateInventarisTable extends Migration
             $table->unsignedBigInteger("id_ruang");
             $table->string("kode_inventaris");
             $table->unsignedBigInteger("id_petugas");
+            $table->string("url_photo")->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

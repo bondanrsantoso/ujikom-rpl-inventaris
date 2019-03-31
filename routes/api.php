@@ -33,3 +33,4 @@ Route::get('inventaris/get', "InventarisController@get");
 Route::get('mobile/inventaris/get', "InventarisController@apiGet");
 // Peminjaman API Routes
 Route::post('peminjaman/checkItem', "PeminjamanController@checkAvailableStock");
+Route::get('peminjaman/get', "PeminjamanController@get");

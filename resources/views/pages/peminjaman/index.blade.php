@@ -14,11 +14,11 @@
 @endsection
  
 @section('content') @component('components.sidebar', [ 'more_classes' => 'col-12 col-md-3 col-xl-2', 'active_link'
-=> url('jenis')]) @endcomponent
+=> url('peminjaman')]) @endcomponent
 <div class="col-12 col-md-9 col-xl-10 pt-4">
-    <h1>Daftar Jenis</h1>
+    <h1>Daftar Peminjaman</h1>
 
-    <button class="btn btn-primary mb-2" data-toggle="modal" data-target="#formModal">Tambah baru</button>
+    {{-- <button class="btn btn-primary mb-2" data-toggle="modal" data-target="#formModal">Tambah baru</button>
 
     <div class="modal" id="formModal">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -110,15 +110,17 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <table class="datatable table table-striped table-hover" id="jenis-table">
         <thead class="thead-primary">
             <th>ID</th>
+            <th>ID_peminjam</th>
             <th>No.</th>
-            <th>Kode</th>
-            <th>Nama</th>
-            <th>Keterangan</th>
+            <th>Peminjam</th>
+            <th>Tanggal Pinjam</th>
+            <th>Tanggal Kembali</th>
+            <th>Status</th>
         </thead>
     </table>
 </div>
@@ -133,7 +135,7 @@
         $table = $("#jenis-table").DataTable({
             ordering: false,
             serverSide: true,
-            ajax:'api/jenis/get',
+            ajax:'api/peminjaman/get',
             select: 'single',
             dom: 'fSrtip',
             scrollY: window.innerHeight - 350,
@@ -142,98 +144,98 @@
             scroller:true,
             columnDefs: [
                 {
-                    targets: [0],
+                    targets: [0, 1],
                     visible:false
                 }
             ],
             buttons: ['excel', 'pdf', 'print']
         });
-        $table.on('select', function(e, dataTable, type, indexes){
-            var selectedItem = $table.rows(indexes).data()[0];
-            $("#idJenis").val(selectedItem[0])
-            $("#idJenisDelete").val(selectedItem[0])
-            $("#kode").val(selectedItem[2])
-            $("#nama").val(selectedItem[3])
-            $("#keterangan").val(selectedItem[4])
-            $("#submit").html("Perbarui")
-            $("#reset").addClass("d-none")
-            $("#delete").removeClass("d-none")
-            $("#formModal").modal('show')
-        })
+        // $table.on('select', function(e, dataTable, type, indexes){
+        //     var selectedItem = $table.rows(indexes).data()[0];
+        //     $("#idJenis").val(selectedItem[0])
+        //     $("#idJenisDelete").val(selectedItem[0])
+        //     $("#kode").val(selectedItem[2])
+        //     $("#nama").val(selectedItem[3])
+        //     $("#keterangan").val(selectedItem[4])
+        //     $("#submit").html("Perbarui")
+        //     $("#reset").addClass("d-none")
+        //     $("#delete").removeClass("d-none")
+        //     $("#formModal").modal('show')
+        // })
     });
 
 
-    $("#mainForm").submit(function(e) {
-        e.preventDefault();
-        var requestBody = new FormData(this);
+    // $("#mainForm").submit(function(e) {
+    //     e.preventDefault();
+    //     var requestBody = new FormData(this);
 
-        $.ajax({
-            method: $(this).attr('method'),
-            url: $(this).attr('action'),
-            processData: false,
-            contentType: false,
-            data: requestBody,
-            success: function(data){
-                $("#formModal").modal('hide')
-                $("#successModal").modal('show');
-                $table.ajax.reload();
-            },
-            error: function(){
-                $("#formModal").modal('hide')
-                $("#failedModal").modal('show');
-            }
-        })
+    //     $.ajax({
+    //         method: $(this).attr('method'),
+    //         url: $(this).attr('action'),
+    //         processData: false,
+    //         contentType: false,
+    //         data: requestBody,
+    //         success: function(data){
+    //             $("#formModal").modal('hide')
+    //             $("#successModal").modal('show');
+    //             $table.ajax.reload();
+    //         },
+    //         error: function(){
+    //             $("#formModal").modal('hide')
+    //             $("#failedModal").modal('show');
+    //         }
+    //     })
 
-    })
+    // })
 
-    $("#deleteForm").submit(function(e){
-        e.preventDefault();
-        var requestBody = new FormData(this);
-        var This = this
+    // $("#deleteForm").submit(function(e){
+    //     e.preventDefault();
+    //     var requestBody = new FormData(this);
+    //     var This = this
 
-        $("#confirmModal").on('hide.bs.modal', function(){
-            if(isActionConfirmed){
-                $.ajax({
-                    method: This.method,
-                    url: This.action,
-                    processData: false,
-                    contentType: false,
-                    data: requestBody,
-                    success: function(data){
-                        $("#formModal").modal('hide')
-                        $("#failedModal").modal('hide');
-                        $("#successModal").modal('show');
-                        $table.ajax.reload();
-                    },
-                    error: function(){
-                        $("#formModal").modal('hide')
-                        $("#successModal").modal('hide');
-                        $("#failedModal").modal('show');
-                    }
-                })
-            }
-        })
+    //     $("#confirmModal").on('hide.bs.modal', function(){
+    //         if(isActionConfirmed){
+    //             $.ajax({
+    //                 method: This.method,
+    //                 url: This.action,
+    //                 processData: false,
+    //                 contentType: false,
+    //                 data: requestBody,
+    //                 success: function(data){
+    //                     $("#formModal").modal('hide')
+    //                     $("#failedModal").modal('hide');
+    //                     $("#successModal").modal('show');
+    //                     $table.ajax.reload();
+    //                 },
+    //                 error: function(){
+    //                     $("#formModal").modal('hide')
+    //                     $("#successModal").modal('hide');
+    //                     $("#failedModal").modal('show');
+    //                 }
+    //             })
+    //         }
+    //     })
 
-        $("#confirmModal").modal('show')
-    })
+    //     $("#confirmModal").modal('show')
+    // })
 
-    $(".confirm-button").click(function (e) {
-        if(typeof $(this).attr('data-confirm') == 'string'){
-            isActionConfirmed = $(this).attr('data-confirm') == "true"
-        } else if(typeof $(this).attr('data-confirm') == 'boolean'){
-            isActionConfirmed = $(this).attr('data-confirm')
-        }
-    })
+    // $(".confirm-button").click(function (e) {
+    //     if(typeof $(this).attr('data-confirm') == 'string'){
+    //         isActionConfirmed = $(this).attr('data-confirm') == "true"
+    //     } else if(typeof $(this).attr('data-confirm') == 'boolean'){
+    //         isActionConfirmed = $(this).attr('data-confirm')
+    //     }
+    // })
 
-    $("#formModal").on('hidden.bs.modal', function(){
-        $("#reset").click();
-        $("#flush").click();
-        $("#idJenis").val('new')
-        $("#submit").html("Tambah")
-        $("#reset").removeClass("d-none")
-        $("#delete").addClass("d-none")
-        $table.rows('.selected').deselect()
-    })
+    // $("#formModal").on('hidden.bs.modal', function(){
+    //     $("#reset").click();
+    //     $("#flush").click();
+    //     $("#idJenis").val('new')
+    //     $("#submit").html("Tambah")
+    //     $("#reset").removeClass("d-none")
+    //     $("#delete").addClass("d-none")
+    //     $table.rows('.selected').deselect()
+    // })
 
 </script>
 @endsection

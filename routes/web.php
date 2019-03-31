@@ -22,4 +22,5 @@ Route::get('ruang', 'RuangController@index')->name('ruangIndex')->middleware('au
 Route::get('jenis', 'JenisController@index')->name('jenisIndex')->middleware('auth');
 Route::get('inventaris', 'InventarisController@index')->name('inventarisIndex')->middleware('auth');
 Route::get('peminjaman', 'PeminjamanController@index')->name('peminjamanIndex')->middleware('auth');
+Route::get('peminjaman/new', 'PeminjamanController@new')->name('peminjamanIndex')->middleware('auth');
 Route::post('peminjaman/add', 'PeminjamanController@add')->name('peminjamanAdd')->middleware('auth');

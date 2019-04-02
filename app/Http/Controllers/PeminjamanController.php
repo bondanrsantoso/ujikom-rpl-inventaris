@@ -155,7 +155,7 @@ class PeminjamanController extends Controller
                 $peminjaman->id_peminjaman,
                 $peminjaman->id_pegawai,
                 $request->start + ++$i,
-                $peminjaman->pegawai->nama ?? "Tidak diketahui",
+                $peminjaman->pegawai->nama_pegawai ?? "Tidak diketahui",
                 $takeawayDate->format("d F Y"),
                 $returnDate->format("d F Y"),
                 $status
@@ -218,5 +218,55 @@ class PeminjamanController extends Controller
         return response()->json([
             "message" => "Data telah ditambahkan"
         ], 201);
+    }
+
+    public function apiGet(Request $request)
+    {
+        $search = $request->search;
+        $totalData = Peminjaman::all()->count();
+
+        $peminjamanQuery = Peminjaman::orderBy('tanggal_pinjam')->orderBy('tanggal_kembali')->orderBy("kembali");
+
+        if($request->user()->id_level == 3){
+            $peminjamanQuery = $peminjamanQuery->where("id_pegawai", $request->user()->id);
+        }
+        if($search['value'] != null){
+            $peminjamanQuery = $peminjamanQuery->where('tanggal_pinjam', '=', $search['value'])->orWhere('tanggal_kembali', '=', $search['value']);
+        }
+        $peminjamanFilteredCount = $peminjamanQuery->count();
+        $Peminjaman = $peminjamanQuery->offset($request->offset ?? 0)->limit($request->limit ?? 100)->get();
+        $responseJSON = [
+            'data' => [],
+            'additional_data' => [
+                'recordsTotal' => $totalData,
+                'recordsFiltered' => $peminjamanFilteredCount,
+            ]
+        ];
+        $i = 0;
+        foreach($Peminjaman as $peminjaman){
+            $today = new \DateTime();
+            $takeawayDate = new \DateTime($peminjaman->tanggal_pinjam);
+            $returnDate = new \DateTime($peminjaman->tanggal_kembali);
+            $status = "Pending";
+            if($peminjaman->kembali == 1){
+                $status = "Dikembalikan";
+            } else if($today >= $takeawayDate && $today <= $returnDate && $peminjaman->kembali == 0){
+                $status = "Dipinjam";
+            } else if($today >= $returnDate && $peminjaman->kembali == 0){
+                $status = "Belum Dikembalikan (TERLAMBAT)";
+            }
+
+            array_push($responseJSON['data'], [
+                "id_peminjaman" => $peminjaman->id_peminjaman,
+                "no" => $request->start + ++$i,
+                "nama_pegawai" => $peminjaman->pegawai->nama ?? "Tidak diketahui",
+                "tanggal_pinjam" => $takeawayDate->getTimestamp(),
+                "tanggal_kembali" => $returnDate->getTimestamp(),
+                "status" => $status,
+                "kembali" => $peminjaman->kembali == 1
+            ]);
+        }
+
+        return response()->json($responseJSON);
     }
 }

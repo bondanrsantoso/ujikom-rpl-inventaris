@@ -40,13 +40,13 @@ class DefaultAdminSeeder extends Seeder
             'username' => "petugas",
             'password' => Hash::make("petugas"),
             'api_token' => hash('sha256', $defaultToken),
-            'id_level' => 1
+            'id_level' => 2
         ]);
         DB::table('petugas')->insert([
             'nama_petugas' => "Petugas",
             'username' => "petugas",
             'password' => Hash::make("petugas"),
-            'id_level' => 1
+            'id_level' => 2
         ]);
 
         $defaultToken = Str::random(60);
@@ -57,7 +57,7 @@ class DefaultAdminSeeder extends Seeder
             'username' => "12345678234561123",
             'password' => Hash::make("pegawai"),
             'api_token' => hash('sha256', $defaultToken),
-            'id_level' => 1
+            'id_level' => 3
         ]);
         DB::table('pegawais')->insert([
             'id_pegawai' => 3,

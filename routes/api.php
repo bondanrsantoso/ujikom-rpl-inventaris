@@ -34,3 +34,8 @@ Route::get('mobile/inventaris/get', "InventarisController@apiGet");
 // Peminjaman API Routes
 Route::post('peminjaman/checkItem', "PeminjamanController@checkAvailableStock");
 Route::get('peminjaman/get', "PeminjamanController@get");
+Route::middleware('auth:api')->post('peminjaman/get/json', "PeminjamanController@apiGet");
+
+// Stateless API Auth
+Route::post("auth/login", "ApiTokenController@apiAuth");
+Route::middleware('auth:api')->post("auth/refresh", "ApiTokenController@refreshToken");

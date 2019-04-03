@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use App\Lib\UserTokenManager;
 
 use App\Inventaris;
 use App\Jenis;
 use App\Ruang;
+
+use App\Http\Controllers\PeminjamanController;
 
 class InventarisController extends Controller
 {
@@ -51,6 +54,13 @@ class InventarisController extends Controller
             $inventaris->tanggal_register = date("Y-m-d");
             $inventaris->id_petugas = Auth::id();
         }
+        if($request->hasFile("photo")){
+            if($request->file("photo")->isValid()){
+                $newFileName = Str::random(16).".".$request->file("photo")->extension();
+                $request->file("photo")->move(public_path("/uploads"), $newFileName);
+                $inventaris->url_photo = $newFileName;
+            }
+        }
         $inventaris->save();
 
         return response()->json([
@@ -91,7 +101,8 @@ class InventarisController extends Controller
                 $inventaris->ruang->kode_ruang,
                 $inventaris->petugas->nama_petugas,
                 $dateTime->format('d F Y'),
-                $inventaris->keterangan
+                $inventaris->keterangan,
+                $inventaris->url_photo ? asset("uploads/".$inventaris->url_photo) : "NULL"
             ]);
         }
 
@@ -118,10 +129,21 @@ class InventarisController extends Controller
     {
         $search = $request->q;
         $totalData = Inventaris::all()->count();
+        $peminjamanController = new PeminjamanController;
 
         $inventarisQuery = Inventaris::orderBy('id_inventaris');
         if($search != null){
             $inventarisQuery = $inventarisQuery->where('nama', 'like', '%'.$search.'%')->orWhere('kode_inventaris', 'like', '%'.$search.'%');
+        }
+        $startDate = null;
+        $endDate = null;
+        if($request->has("start_date") && $request->has("end_date")){
+            $startDate = $request->start_date;
+            $endDate = $request->end_date;
+        }
+        if($request->has("only")){
+            $onlyID = explode(",", $request->only);
+            $inventarisQuery->whereIn('id_inventaris', $onlyID);
         }
         $inventarisFilteredCount = $inventarisQuery->count();
         $Inventaris = $inventarisQuery->offset($request->offset ?? 0)->limit($request->limit ?? 10)->get();
@@ -135,7 +157,7 @@ class InventarisController extends Controller
         $i = 0;
         foreach($Inventaris as $inventaris){
             $dateTime =  new \DateTime($inventaris->tanggal_register);
-            array_push($responseJSON['data'], [
+            $data = [
                 'id_inventaris' => $inventaris->id_inventaris,
                 'id_jenis' => $inventaris->id_jenis,
                 'id_ruang' => $inventaris->id_ruang,
@@ -143,7 +165,7 @@ class InventarisController extends Controller
                 'nama' => $inventaris->nama,
                 'kondisi' => $inventaris->kondisi,
                 'jumlah' => $inventaris->jumlah,
-                'url_gambar' => "https://images.pexels.com/photos/1166420/pexels-photo-1166420.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+                'url_gambar' => $inventaris->url_photo ? asset("uploads/".$inventaris->url_photo) : asset("image-404.jpg"),
                 'kode_jenis' => $inventaris->jenis->kode_jenis,
                 'nama_jenis' => $inventaris->jenis->nama_jenis,
                 'kode_ruang' => $inventaris->ruang->kode_ruang,
@@ -151,7 +173,12 @@ class InventarisController extends Controller
                 'kode_petugas' => $inventaris->petugas->nama_petugas,
                 'tanggal_register' => $dateTime->format('d F Y'),
                 'keterangan' => $inventaris->keterangan
-            ]);
+            ];
+            if($startDate != null && $endDate != null){
+                $data['stok'] = $peminjamanController->calculateRemaining($inventaris->id_inventaris, $startDate, $endDate);
+            }
+
+            array_push($responseJSON['data'], $data);
         }
 
         return response()->json($responseJSON);

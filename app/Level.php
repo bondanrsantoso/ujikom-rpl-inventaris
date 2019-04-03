@@ -15,7 +15,7 @@ class Level extends Model
 
     public function users()
     {
-        return $this->hasMany('App\User', "id", $this->primaryKey);
+        return $this->hasMany('App\User', "id_level", $this->primaryKey);
     }
 
     public function petugas(){

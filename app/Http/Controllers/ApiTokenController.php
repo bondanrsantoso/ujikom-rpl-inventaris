@@ -29,10 +29,14 @@ class ApiTokenController extends Controller
 
         if(Auth::once(['username' => $username, "password" => $password])){
             $user = User::where("username", $username)->first();
-            $token = UserTokenManager::generateToken($request->user());
+            $token = UserTokenManager::generateToken($user);
             return response()->json([
                 'api_token' => $token
             ]);
+        } else{
+            return response()->json([
+                'message' => "You're not allowed"
+            ], 403);
         }
     }
 

@@ -196,7 +196,9 @@ class PeminjamanController extends Controller
         }
 
         if(sizeof($errors) > 0){
-            return back()->with('submitError', $errors);
+            return response()->json([
+                "error" => $errors
+            ], 400);
         }
 
         $peminjaman = new Peminjaman();
@@ -207,6 +209,9 @@ class PeminjamanController extends Controller
 
         $i = 0;
         foreach($inventarisIDs as $inventarisID){
+            if($takeawayAmounts[$i] <= 0)
+                continue;   
+
             $detail = new DetailPinjam;
             $detail->id_inventaris = $inventarisID;
             $detail->jumlah = $takeawayAmounts[$i];

@@ -38,6 +38,7 @@ Route::middleware('auth:api')->post('pegawai/add', "PegawaiController@add");
 Route::post('peminjaman/checkItem', "PeminjamanController@checkAvailableStock");
 Route::get('peminjaman/get', "PeminjamanController@get");
 Route::middleware('auth:api')->post('peminjaman/get/json', "PeminjamanController@apiGet");
+Route::middleware('auth:api')->post('peminjaman/add', "PeminjamanController@apiAdd");
 
 // Stateless API Auth
 Route::post("auth/login", "ApiTokenController@apiAuth");

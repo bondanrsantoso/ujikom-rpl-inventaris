@@ -25,7 +25,34 @@ class InventarisController extends Controller
         $Jenis = Jenis::all();
         $Ruang = Ruang::all();
 
-        return view('pages.inventaris.index')->with('token', UserTokenManager::generateToken($currentUser))->with('Jenis', $Jenis)->with('Ruang', $Ruang);
+        return view('pages.inventaris.index')->with('user', $currentUser)->with('token', UserTokenManager::generateToken($currentUser))->with('Jenis', $Jenis)->with('Ruang', $Ruang);
+    }
+
+    public function generateKode(Request $request)
+    {
+        $lengthOfCode = 4;
+        $jenis = Jenis::find($request->jenis);
+        $ruang = Ruang::find($request->ruang);
+        if($request->has("id")){
+            $inv = Inventaris::find($request->id);
+            if($jenis->id_jenis == $inv->id_jenis && $ruang->id_ruang == $inv->id_ruang){
+                return response()->json([
+                    "id" => $inv->kode_inventaris
+                ]);
+            }
+        }
+
+        $id = Inventaris::where("id_jenis", $request->jenis)
+                ->where("id_ruang", $request->ruang)->count();
+        $id++;
+        $id =(string) $id;
+        for($i = \sizeof($id); $i < $lengthOfCode; $i++){
+            $id = "0".$id;
+        }
+        
+        return response()->json([
+            "id" => $ruang->kode_ruang."-".$jenis->kode_jenis."-".$id
+        ]);
     }
 
     public function add(Request $request)

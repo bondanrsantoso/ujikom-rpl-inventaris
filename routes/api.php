@@ -30,6 +30,7 @@ Route::get('mobile/jenis/get', "JenisController@apiGet");
 Route::middleware('auth:api')->post('inventaris/add', "InventarisController@add");
 Route::middleware('auth:api')->delete('inventaris/delete', "InventarisController@delete");
 Route::get('inventaris/get', "InventarisController@get");
+Route::get('inventaris/generateCode', "InventarisController@generateKode");
 Route::get('mobile/inventaris/get', "InventarisController@apiGet");
 // Pegawai API Routes
 Route::middleware('auth:api')->post('pegawai/add', "PegawaiController@add");
@@ -38,6 +39,7 @@ Route::middleware('auth:api')->post('pegawai/add', "PegawaiController@add");
 Route::post('peminjaman/checkItem', "PeminjamanController@checkAvailableStock");
 Route::get('peminjaman/get', "PeminjamanController@get");
 Route::middleware('auth:api')->post('peminjaman/get/json', "PeminjamanController@apiGet");
+Route::get('peminjaman/detail/json', "PeminjamanController@apiDetail");
 Route::middleware('auth:api')->post('peminjaman/add', "PeminjamanController@apiAdd");
 
 // Stateless API Auth

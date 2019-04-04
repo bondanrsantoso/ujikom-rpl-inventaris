@@ -25,7 +25,7 @@ class RuangController extends Controller
             return redirect("home");
         }
 
-        return view('pages.ruang.index')->with('token', UserTokenManager::generateToken($currentUser));
+        return view('pages.ruang.index')->with('user', $currentUser)->with('token', UserTokenManager::generateToken($currentUser));
     }
 
     public function add(Request $request)

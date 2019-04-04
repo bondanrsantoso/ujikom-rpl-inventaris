@@ -12,16 +12,19 @@
 */
 
 Route::get('/', function () {
-    return redirect('home');
+    return redirect('ruang');
 });
 
 Auth::routes();
 
-Route::get('home', 'HomeController@index')->name('home')->middleware('auth');
-Route::get('ruang', 'RuangController@index')->name('ruangIndex')->middleware('auth');
-Route::get('jenis', 'JenisController@index')->name('jenisIndex')->middleware('auth');
-Route::get('inventaris', 'InventarisController@index')->name('inventarisIndex')->middleware('auth');
-Route::get('pegawai', 'PegawaiController@index')->name('pegawaiIndex')->middleware('auth');
-Route::get('peminjaman', 'PeminjamanController@index')->name('peminjamanIndex')->middleware('auth');
-Route::get('peminjaman/new', 'PeminjamanController@new')->name('peminjamanIndex')->middleware('auth');
+Route::get('home', function () {
+    return redirect('peminjaman');
+})->name('home')->middleware('auth');
+Route::get('ruang', 'RuangController@index')->name('ruangindex')->middleware('auth');
+Route::get('jenis', 'JenisController@index')->name('jenisindex')->middleware('auth');
+Route::get('inventaris', 'InventarisController@index')->name('inventarisindex')->middleware('auth');
+Route::get('pegawai', 'PegawaiController@index')->name('pegawaiindex')->middleware('auth');
+Route::get('peminjaman', 'PeminjamanController@index')->name('peminjamanindex')->middleware('auth');
+Route::get('peminjaman/new', 'PeminjamanController@new')->name('peminjamanindex')->middleware('auth');
 Route::post('peminjaman/add', 'PeminjamanController@add')->name('peminjamanAdd')->middleware('auth');
+Route::post('peminjaman/return', 'PeminjamanController@returnInventaris')->name('peminjamanReturn')->middleware('auth');

@@ -23,7 +23,7 @@
 @endsection
  
 @section('content') @component('components.sidebar', [ 'more_classes' => 'col-12 col-md-3 col-xl-2', 'active_link'
-=> url('inventaris')]) @endcomponent
+=> url('inventaris'), 'user' => $user]) @endcomponent
 <div class="col-12 col-md-9 col-xl-10 pt-4">
     <h1>Daftar Inventaris</h1>
 
@@ -51,7 +51,7 @@
                             </div>
                             <div class="form-group col col-md-6 col-xl-4">
                                 <label for="kode">Kode Inventaris</label>
-                                <input type="text" name="kode" id="kode" class="form-control" required>
+                                <input type="text" name="kode" readonly id="kode" class="form-control" required>
                             </div>
                             <div class="form-group col-12 col-md">
                                 <label for="nama">Nama</label>
@@ -230,6 +230,7 @@
             $("#delete").removeClass("d-none")
             $("#formModal").modal('show')
         })
+        generateCode();
     });
 
 
@@ -321,7 +322,23 @@
         $("#delete").addClass("d-none")
         $("#photoPreview").addClass("hidden");
         $table.rows('.selected').deselect()
+        generateCode();
     })
+
+    function generateCode(){
+        var url = "{{url('api/inventaris/generateCode')}}";
+        url = url + "?ruang=" + $("#ruang").val() + "&jenis=" + $("#jenis").val()
+        if($("#idInventaris").val() != "new"){
+            url = url + "&id=" + $("#idInventaris").val()
+        }
+        $.get(url).done(function (data){
+            $("#kode").val(data.id);
+        })
+    }
+
+    $("#jenis, #ruang").change(function(e){
+        generateCode();
+    });
 
 </script>
 @endsection

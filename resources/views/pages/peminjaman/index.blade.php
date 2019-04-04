@@ -14,7 +14,7 @@
 @endsection
  
 @section('content') @component('components.sidebar', [ 'more_classes' => 'col-12 col-md-3 col-xl-2', 'active_link'
-=> url('peminjaman')]) @endcomponent
+=> url('peminjaman'), 'user' => $user]) @endcomponent
 <div class="col-12 col-md-9 col-xl-10 pt-4">
     <h1>Daftar Peminjaman</h1>
 
@@ -112,6 +112,11 @@
         </div>
     </div> --}}
 
+    <form id="returnForm" action="{{url('peminjaman/return')}}" method="post">
+        <input type="hidden" name="api_token" value="{{$token}}" id="apiToken">
+        <input type="hidden" name="id" id="id_peminjaman">
+    </form>
+
     <table class="datatable table table-striped table-hover" id="jenis-table">
         <thead class="thead-primary">
             <th>ID</th>
@@ -121,6 +126,7 @@
             <th>Tanggal Pinjam</th>
             <th>Tanggal Kembali</th>
             <th>Status</th>
+            <th></th>
         </thead>
     </table>
 </div>
@@ -136,7 +142,6 @@
             ordering: false,
             serverSide: true,
             ajax:'api/peminjaman/get',
-            select: 'single',
             dom: 'fSrtip',
             scrollY: window.innerHeight - 350,
             scrollCollapse: true,
@@ -236,6 +241,25 @@
     //     $("#delete").addClass("d-none")
     //     $table.rows('.selected').deselect()
     // })
+
+    $(".return-btn").on("click", function(){
+        $("#id_peminjaman").val($(this).attr("data-id"));
+        var form = document.getElementById("returnForm");
+        var formData = new FormData(form);
+
+        $.ajax({
+            method: "post",
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function(data){
+                $table.ajax.reload()
+            },
+            error: function(){
+                alert("failed");
+            }
+        })
+    })
 
 </script>
 @endsection

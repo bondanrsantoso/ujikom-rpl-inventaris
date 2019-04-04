@@ -17,7 +17,7 @@ class JenisController extends Controller
             return redirect("home");
         }
 
-        return view('pages.jenis.index')->with('token', UserTokenManager::generateToken($currentUser));
+        return view('pages.jenis.index')->with('user', $currentUser)->with('token', UserTokenManager::generateToken($currentUser));
     }
 
     public function add(Request $request)

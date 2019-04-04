@@ -14,7 +14,7 @@
 @endsection
  
 @section('content') @component('components.sidebar', [ 'more_classes' => 'col-12 col-md-3 col-xl-2', 'active_link'
-=> url('jenis')]) @endcomponent
+=> url('jenis'), 'user' => $user]) @endcomponent
 <div class="col-12 col-md-9 col-xl-10 pt-4">
     <h1>Daftar Jenis</h1>
 

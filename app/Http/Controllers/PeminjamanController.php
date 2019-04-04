@@ -54,7 +54,8 @@ class PeminjamanController extends Controller
         $takeawayDate = $request->input('takeaway_date');
         $returnDate = $request->input('return_date');
         
-        $stock = $this->calculateRemaining($inventarisID, $takeawayDate, $returnDate);
+        // $stock = $this->calculateRemaining($inventarisID, $takeawayDate, $returnDate);
+        $stock = Inventaris::find($inventarisID)->jumlah;
 
         return response()->json([
             "stock" => $stock

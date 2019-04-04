@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        // $this->call(StoredProcedure::class);
         $this->call(UserLevelSeeder::class);
         if(env("APP_DEBUG")){
             $this->call(DefaultAdminSeeder::class);

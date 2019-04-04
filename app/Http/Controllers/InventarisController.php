@@ -202,7 +202,7 @@ class InventarisController extends Controller
                 'keterangan' => $inventaris->keterangan
             ];
             if($startDate != null && $endDate != null){
-                $data['stok'] = $peminjamanController->calculateRemaining($inventaris->id_inventaris, $startDate, $endDate);
+                $data['stok'] = $data["jumlah"];
             }
 
             array_push($responseJSON['data'], $data);

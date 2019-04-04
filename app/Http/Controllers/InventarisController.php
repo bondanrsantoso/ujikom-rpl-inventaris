@@ -30,6 +30,11 @@ class InventarisController extends Controller
 
     public function generateKode(Request $request)
     {
+        if(Jenis::all()->count() == 0 || Ruang::all()->count() == 0){
+            return response()->json([
+                "id" => ""
+            ]);
+        }
         $lengthOfCode = 4;
         $jenis = Jenis::find($request->jenis);
         $ruang = Ruang::find($request->ruang);

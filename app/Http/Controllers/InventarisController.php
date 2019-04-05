@@ -51,7 +51,7 @@ class InventarisController extends Controller
                 ->where("id_ruang", $request->ruang)->count();
         $id++;
         $id =(string) $id;
-        for($i = \sizeof($id); $i < $lengthOfCode; $i++){
+        for($i = \strlen($id); $i < $lengthOfCode; $i++){
             $id = "0".$id;
         }
         

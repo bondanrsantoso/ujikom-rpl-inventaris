@@ -7,15 +7,17 @@ BEGIN
 	DECLARE _ROWS INT;
 	DECLARE _JUMLAH INT;
 	DECLARE _ID INT;
-	SELECT COUNT(*) INTO _ROWS FROM detail_pinjams WHERE id_peminjaman = NEW.id_peminjaman;
-	SET I = 0;
-	WHILE I < _ROWS DO
-		SELECT jumlah INTO _JUMLAH FROM detail_pinjams WHERE id_peminjaman = NEW.id_peminjaman LIMIT 1 OFFSET I;
-		SELECT id_inventaris INTO _ID  FROM detail_pinjams WHERE id_peminjaman = NEW.id_peminjaman LIMIT 1 OFFSET I;
-		
-		UPDATE inventaris SET jumlah = IF(NEW.kembali = 1, jumlah + _JUMLAH, jumlah - _JUMLAH) WHERE id_inventaris = _ID;
-		SET I = I + 1;
-	END WHILE;
+	IF OLD.kembali <> NEW.kembali THEN
+        SELECT COUNT(*) INTO _ROWS FROM detail_pinjams WHERE id_peminjaman = NEW.id_peminjaman;
+        SET I = 0;
+        WHILE I < _ROWS DO
+            SELECT jumlah INTO _JUMLAH FROM detail_pinjams WHERE id_peminjaman = NEW.id_peminjaman LIMIT 1 OFFSET I;
+            SELECT id_inventaris INTO _ID  FROM detail_pinjams WHERE id_peminjaman = NEW.id_peminjaman LIMIT 1 OFFSET I;
+            
+            UPDATE inventaris SET jumlah = IF(NEW.kembali = 1, jumlah + _JUMLAH, jumlah - _JUMLAH) WHERE id_inventaris = _ID;
+            SET I = I + 1;
+        END WHILE;
+    END IF;
 END$$
 DELIMITER ;
 

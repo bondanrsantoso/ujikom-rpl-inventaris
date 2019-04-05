@@ -162,6 +162,9 @@ class PeminjamanController extends Controller
             $today = new \DateTime();
             $takeawayDate = new \DateTime($peminjaman->tanggal_pinjam);
             $returnDate = new \DateTime($peminjaman->tanggal_kembali);
+            if($takeawayDate == $returnDate){
+                $returnDate->modify("+1 day");
+            }
             $status = "Pending";
             if($peminjaman->kembali == 1){
                 $status = "Dikembalikan";
